@@ -10,9 +10,9 @@ namespace Garage.Vehicles
     {
         public string RegistrationNumber { get; set; }
         public string Color { get; set; }
-        public int NumberOfWheels { get; set; }
+        public int? NumberOfWheels { get; set; }
 
-        public Vehicle(string registrationNumber, string color, int numberOfWheels)
+        public Vehicle(string registrationNumber, string color, int? numberOfWheels = null)
         {
             RegistrationNumber = registrationNumber;
             Color = color;
