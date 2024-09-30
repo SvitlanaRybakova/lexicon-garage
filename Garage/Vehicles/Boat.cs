@@ -14,5 +14,10 @@ namespace Garage.Vehicles
         {
             Widht = widht;
         }
+
+        public override string ToString()
+        {
+            return $"Type: {GetType().Name}\nRegistration number: {RegistrationNumber}\nColor: {Color}\nWheels: {NumberOfWheels} \nBoat Widht: {Widht}";
+        }
     }
 }

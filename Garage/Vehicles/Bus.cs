@@ -15,5 +15,9 @@ namespace Garage.Vehicles
         {
             PassengerCapacity = passengerCapacity;
         }
+        public override string ToString()
+        {
+            return $"Type: {GetType().Name}\nRegistration number: {RegistrationNumber}\nColor: {Color}\nWheels: {NumberOfWheels} \nPassengerCapacity: {PassengerCapacity}";
+        }
     }
 }

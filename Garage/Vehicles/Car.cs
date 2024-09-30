@@ -13,5 +13,10 @@ namespace Garage.Vehicles
         {
             Fuel = fuel;
         }
+
+        public override string ToString()
+        {
+            return $"Type: {GetType().Name}\nRegistration number: {RegistrationNumber}\nColor: {Color}\nWheels: {NumberOfWheels} \nFuelType: {Fuel}";
+        }
     }
 }

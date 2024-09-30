@@ -12,5 +12,10 @@ namespace Garage.Vehicles
         {
             CylinderVolume = cylinderVolume;
         }
+
+        public override string ToString()
+        {
+            return $"Type: {GetType().Name}\nRegistration number: {RegistrationNumber}\nColor: {Color}\nWheels: {NumberOfWheels} \nCylinder Volume: {CylinderVolume}";
+        }
     }
 }
