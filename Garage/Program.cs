@@ -1,8 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System.Reflection.Metadata;
+﻿using System.Reflection.Metadata;
 using Garage;
 using Garage.Garage;
+using Garage.UI;
 using Garage.Vehicles;
 
 Garage<Car> carGarage = new Garage<Car>(2); // max capacity => 2 cars
@@ -14,4 +13,6 @@ foreach (var car in carGarage)
     Console.WriteLine(car.ToString());
     Console.WriteLine();
 }
+
+UserInterface.ShowMainMenu();
 
