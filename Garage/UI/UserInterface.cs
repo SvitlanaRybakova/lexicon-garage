@@ -20,7 +20,7 @@ namespace Garage.UI
                                 + "\n4. Search vehicles"
                                 + "\n5. Create a new garage"
                                 + "\n0. Exit the application"
-                                + "***************************************");
+                                + "\n ***************************************");
 
                 input = int.Parse(Console.ReadLine() ?? "");
 

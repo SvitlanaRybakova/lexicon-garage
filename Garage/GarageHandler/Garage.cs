@@ -21,8 +21,7 @@ namespace Garage.Garage
             currentVehicleNumber = 0;
         }
 
-
-        public void AddVehicle(T vehicle)
+        internal void AddVehicle(T vehicle)
         {
             if (currentVehicleNumber >= maxGarageCapacity)
             {
@@ -30,9 +29,10 @@ namespace Garage.Garage
             }
 
             vehicles[currentVehicleNumber] = vehicle;
+            // TODO: create the info function
+            Console.WriteLine($"Vehicle {vehicle.RegistrationNumber} added successfully.");
             currentVehicleNumber++;
         }
-
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < currentVehicleNumber; i++)
