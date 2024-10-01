@@ -15,21 +15,21 @@ namespace Garage.UI
             do
             {
                 Console.WriteLine(
-                                "************ Main Menu ******************"
+                                "\n************ Main Menu ******************"
                                 + "\n1. Print all vehicle"
                                 + "\n2. Print vehicle types and number of each"
                                 + "\n3. Add/remove vehicles from the garage (via registration number)"
                                 + "\n4. Search vehicles"
                                 + "\n5. Create a new garage"
                                 + "\n0. Exit the application"
-                                + "\n ***************************************");
+                                + "\n ***************************************\n");
 
                 input = Helpers.Utils.AskForMenuOption();
 
                 switch (input)
                 {
                     case (int)Constants.MainMenuOptions.PrintAllVehicles:
-                        Console.WriteLine("PrintAllVehicles");
+                        garageHandler.PrintAllVehicles();
                         break;
 
                     case (int)Constants.MainMenuOptions.PrintVehicleTypesAndCounts:
@@ -69,11 +69,11 @@ namespace Garage.UI
             do
             {
                 Console.WriteLine(
-                                "************ Add or Delete Vehicle ******************"
+                                "\n************ Add or Delete Vehicle ******************"
                                 + "\n1. Add vehicle"
                                 + "\n2. Delete vehicle"
                                 + "\n0. Go to Main Menu"
-                                + "\n ***************************************");
+                                + "\n ***************************************\n");
 
                 input = Helpers.Utils.AskForMenuOption();
 

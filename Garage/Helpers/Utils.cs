@@ -67,7 +67,7 @@ namespace Garage.Helpers
             int wheels;
             while (true)
             {
-                string wheelsInput = AskForString("Enter number of wheels: ");
+                string wheelsInput = AskForString("Enter number of wheels ");
                 if (int.TryParse(wheelsInput, out wheels))
                 {
                     return wheels;
@@ -81,7 +81,7 @@ namespace Garage.Helpers
             FuelType fuelType;
             while (true)
             {
-                string fuelTypeInput = AskForString("Enter fuel type (Benzin or Diesel): ");
+                string fuelTypeInput = AskForString("Enter fuel type (Benzin or Diesel) ");
                 if (Enum.TryParse(fuelTypeInput, true, out fuelType) && Enum.IsDefined(typeof(FuelType), fuelType))
                 {
                     return fuelType;
@@ -96,7 +96,7 @@ namespace Garage.Helpers
             int passengerCapacity;
             while (true)
             {
-                string passengerCapacityInput = AskForString("Enter a passenger capacity number: ");
+                string passengerCapacityInput = AskForString("Enter a passenger capacity number ");
                 if (int.TryParse(passengerCapacityInput, out passengerCapacity))
                 {
                     return passengerCapacity;

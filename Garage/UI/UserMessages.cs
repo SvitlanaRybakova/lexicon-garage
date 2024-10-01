@@ -28,7 +28,7 @@ namespace Garage.UI
           public static void InfoMessage(string message)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(message);
+            Console.Write(message);
             DefaultConsoleColor();
         }
     }
