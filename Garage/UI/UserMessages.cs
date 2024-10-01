@@ -20,6 +20,13 @@ namespace Garage.UI
 
         public static void SuccessMessage(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(message);
+            DefaultConsoleColor();
+        }
+
+          public static void InfoMessage(string message)
+        {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(message);
             DefaultConsoleColor();

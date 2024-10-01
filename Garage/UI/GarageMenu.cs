@@ -22,12 +22,7 @@ namespace Garage.UI
                                 + "\n0. Exit the application"
                                 + "\n ***************************************");
 
-                string userInput = Console.ReadLine() ?? " ";
-                if (!int.TryParse(userInput, out input))
-                {
-                    Console.WriteLine("Invalid input, please enter a number.");
-                    continue;
-                }
+                input = Helpers.Utils.AskForMenuOption();
 
                 switch (input)
                 {
@@ -78,12 +73,7 @@ namespace Garage.UI
                                 + "\n0. Go to Main Menu"
                                 + "\n ***************************************");
 
-                string userInput = Console.ReadLine() ?? " ";
-                if (!int.TryParse(userInput, out input))
-                {
-                    UserMessages.ErrorMessage("Invalid input, please enter a number");
-                    continue;
-                }
+                input = Helpers.Utils.AskForMenuOption();
 
                 switch (input)
                 {
@@ -107,6 +97,7 @@ namespace Garage.UI
             } while (input != (int)Constants.AddDeleteMenuOptions.Exit);
 
         }
+
 
     }
 
