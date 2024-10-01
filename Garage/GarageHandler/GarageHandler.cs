@@ -40,11 +40,11 @@ namespace Garage.GarageHandler
                 switch (input)
                 {
                     case (int)Constants.AddMenuOptions.Airplane:
-                        Console.WriteLine("Add airplane");
+                        AddAirplane();
                         break;
 
                     case (int)Constants.AddMenuOptions.Boat:
-                        Console.WriteLine("Add boat");
+                        AddBoat();
                         break;
 
                     case (int)Constants.AddMenuOptions.Bus:
@@ -55,10 +55,10 @@ namespace Garage.GarageHandler
                         AddCar();
                         break;
                     case (int)Constants.AddMenuOptions.Motorcycle:
-                        Console.WriteLine("Add motorcycle");
+                        AddMotorcycle();
                         break;
                     case (int)Constants.AddMenuOptions.Exit:
-                        Console.WriteLine("Exiting");
+                        UI.UserMessages.InfoMessage("Exiting\n");
                         break;
                     default:
                         UserMessages.ErrorMessage("Invalid option, please try again");
@@ -71,10 +71,11 @@ namespace Garage.GarageHandler
 
         public void PrintAllVehicles()
         {
-           if(_garage.currentVehicleNumber == 0){
+            if (_garage.currentVehicleNumber == 0)
+            {
                 UI.UserMessages.InfoMessage("The Garage is empty");
                 return;
-           }
+            }
             foreach (var vehicle in _garage)
             {
                 UserMessages.InfoMessage($"\n{vehicle}\n");
@@ -117,7 +118,41 @@ namespace Garage.GarageHandler
             _garage.AddVehicle((T)(object)vehicle);
         }
 
+        public void AddAirplane()
+        {
+            UI.UserMessages.InfoMessage("Adding the airplane...\n");
+            string regNumber = Helpers.Utils.AskForString("Enter vehicle registration number ");
+            string color = Helpers.Utils.AskForString("Enter vehicle color ");
 
+            int wheels = Utils.GetWheelsInput();
+            NumberOfEnginesType numberOfEngines = Utils.GetNumberOfEnginesInput();
+
+            var vehicle = new Airplane(regNumber, color, wheels, numberOfEngines);
+            _garage.AddVehicle((T)(object)vehicle);
+        }
+
+        public void AddBoat()
+        {
+            UI.UserMessages.InfoMessage("Adding the boat...\n");
+            string regNumber = Helpers.Utils.AskForString("Enter vehicle registration number ");
+            string color = Helpers.Utils.AskForString("Enter vehicle color ");
+            double width = Utils.GetWidthInput();
+
+            var vehicle = new Boat(regNumber, color, width);
+            _garage.AddVehicle((T)(object)vehicle);
+        }
+
+        public void AddMotorcycle()
+        {
+            UI.UserMessages.InfoMessage("Adding the motorcycle...\n");
+            string regNumber = Helpers.Utils.AskForString("Enter vehicle registration number ");
+            string color = Helpers.Utils.AskForString("Enter vehicle color ");
+            int wheels = Utils.GetWheelsInput();
+            int cylinderVolume = Utils.GetCylinderVolumeInput();
+
+            var vehicle = new Motorcycle(regNumber, color, wheels, cylinderVolume);
+            _garage.AddVehicle((T)(object)vehicle);
+        }
 
     }
 }

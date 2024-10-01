@@ -104,5 +104,48 @@ namespace Garage.Helpers
                 UI.UserMessages.ErrorMessage("Invalid input. Please enter a valid passenger capacity number");
             }
         }
+
+        public static NumberOfEnginesType GetNumberOfEnginesInput()
+        {
+            NumberOfEnginesType numberOfEngines;
+            while (true)
+            {
+                string numberOfEnginesInput = AskForString("Enter a number of engines ");
+                if (Enum.TryParse(numberOfEnginesInput, true, out numberOfEngines) && Enum.IsDefined(typeof(NumberOfEnginesType), numberOfEngines))
+                {
+                    return numberOfEngines;
+                }
+                UI.UserMessages.ErrorMessage("Invalid input. Please enter a valid number of engines");
+            }
+        }
+
+
+        public static double GetWidthInput()
+        {
+            double width;
+            while (true)
+            {
+                string widhtInput = AskForString("Enter a boat width ");
+                if (double.TryParse(widhtInput, out width))
+                {
+                    return width;
+                }
+                UI.UserMessages.ErrorMessage("Invalid input. Please enter a valid boat width");
+            }
+        }
+
+        public static int GetCylinderVolumeInput()
+        {
+            int cylinderVolume;
+            while (true)
+            {
+                string cylinderVolumeInput = AskForString("Enter number of cylinder volume ");
+                if (int.TryParse(cylinderVolumeInput, out cylinderVolume))
+                {
+                    return cylinderVolume;
+                }
+                UI.UserMessages.ErrorMessage("Invalid input. Please enter a valid number for cylinder volume");
+            }
+        }
     }
 }

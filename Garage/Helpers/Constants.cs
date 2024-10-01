@@ -18,7 +18,7 @@ namespace Garage
             Exit = 0
         }
 
-        public enum NumberOfEngines
+        public enum NumberOfEnginesType
         {
             One = 1,
             Two = 2,

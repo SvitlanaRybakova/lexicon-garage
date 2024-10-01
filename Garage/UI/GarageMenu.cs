@@ -39,7 +39,6 @@ namespace Garage.UI
 
                     case (int)Constants.MainMenuOptions.AddOrRemoveVehicles:
                         AddDeleteMenu(garageHandler);
-                        Console.WriteLine("AddOrRemoveVehicles");
                         break;
 
                     case (int)Constants.MainMenuOptions.SearchVehicles:
