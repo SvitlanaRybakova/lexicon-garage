@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static Garage.Constants;
 
@@ -145,6 +146,21 @@ namespace Garage.Helpers
                     return cylinderVolume;
                 }
                 UI.UserMessages.ErrorMessage("Invalid input. Please enter a valid number for cylinder volume");
+            }
+        }
+
+        public static string GetRegistrationNumberInput()
+        {
+            string pattern = @"^[a-z]{3}\d{3}$";
+
+            while (true)
+            {
+                string regNumberInput = AskForString("Enter vehicle registration number ");
+                if (Regex.IsMatch(regNumberInput, pattern))
+                {
+                    return regNumberInput.ToUpper();
+                }
+                UI.UserMessages.ErrorMessage("Invalid input. Please enter a valid registration number. Correct format is ABC123");
             }
         }
     }

@@ -58,7 +58,7 @@ namespace Garage.GarageHandler
                         AddMotorcycle();
                         break;
                     case (int)Constants.AddMenuOptions.Exit:
-                        UI.UserMessages.InfoMessage("Exiting\n");
+                        UI.UserMessages.InfoMessage("Exiting to previos menu...\n");
                         break;
                     default:
                         UserMessages.ErrorMessage("Invalid option, please try again");
@@ -73,7 +73,7 @@ namespace Garage.GarageHandler
         {
             if (_garage.currentVehicleNumber == 0)
             {
-                UI.UserMessages.InfoMessage("The Garage is empty");
+                UI.UserMessages.InfoMessage("\nThe Garage is empty\n");
                 return;
             }
             foreach (var vehicle in _garage)
@@ -95,7 +95,7 @@ namespace Garage.GarageHandler
         public void AddCar()
         {
             UI.UserMessages.InfoMessage("Adding the car...\n");
-            string regNumber = Helpers.Utils.AskForString("Enter vehicle registration number ");
+            string regNumber = Utils.GetRegistrationNumberInput();
             string color = Helpers.Utils.AskForString("Enter vehicle color ");
 
             int wheels = Utils.GetWheelsInput();
@@ -108,7 +108,7 @@ namespace Garage.GarageHandler
         public void AddBus()
         {
             UI.UserMessages.InfoMessage("Adding the bus...\n");
-            string regNumber = Helpers.Utils.AskForString("Enter vehicle registration number ");
+            string regNumber = Utils.GetRegistrationNumberInput();
             string color = Helpers.Utils.AskForString("Enter vehicle color ");
 
             int wheels = Utils.GetWheelsInput();
@@ -121,7 +121,7 @@ namespace Garage.GarageHandler
         public void AddAirplane()
         {
             UI.UserMessages.InfoMessage("Adding the airplane...\n");
-            string regNumber = Helpers.Utils.AskForString("Enter vehicle registration number ");
+            string regNumber = Utils.GetRegistrationNumberInput();
             string color = Helpers.Utils.AskForString("Enter vehicle color ");
 
             int wheels = Utils.GetWheelsInput();
@@ -134,7 +134,7 @@ namespace Garage.GarageHandler
         public void AddBoat()
         {
             UI.UserMessages.InfoMessage("Adding the boat...\n");
-            string regNumber = Helpers.Utils.AskForString("Enter vehicle registration number ");
+            string regNumber = Utils.GetRegistrationNumberInput();
             string color = Helpers.Utils.AskForString("Enter vehicle color ");
             double width = Utils.GetWidthInput();
 
@@ -145,7 +145,7 @@ namespace Garage.GarageHandler
         public void AddMotorcycle()
         {
             UI.UserMessages.InfoMessage("Adding the motorcycle...\n");
-            string regNumber = Helpers.Utils.AskForString("Enter vehicle registration number ");
+            string regNumber = Utils.GetRegistrationNumberInput();
             string color = Helpers.Utils.AskForString("Enter vehicle color ");
             int wheels = Utils.GetWheelsInput();
             int cylinderVolume = Utils.GetCylinderVolumeInput();
