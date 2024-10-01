@@ -27,5 +27,12 @@ namespace Garage
             SearchVehicles = 4,
             CreateNewGarage = 5
         }
+
+        public enum AddDeleteMenuOptions
+        {
+            Exit = 0,
+            AddVehicle = 1,
+            DeleteVehicle = 2,
+        }
     }
 }

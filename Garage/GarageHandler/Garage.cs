@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Garage.Vehicles;
 using System.Collections;
+using Garage.UI;
 
 
 namespace Garage.Garage
@@ -29,8 +30,7 @@ namespace Garage.Garage
             }
 
             vehicles[currentVehicleNumber] = vehicle;
-            // TODO: create the info function
-            Console.WriteLine($"Vehicle {vehicle.RegistrationNumber} added successfully.");
+            UserMessages.SuccessMessage($"Vehicle {vehicle.RegistrationNumber} added successfully");
             currentVehicleNumber++;
         }
         public IEnumerator<T> GetEnumerator()
