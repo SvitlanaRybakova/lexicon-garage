@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Garage.GarageHandler;
+using Garage.Vehicles;
 
 namespace Garage.UI
 {
     public class GarageMenu
     {
-        public static void ShowMainMenu()
+        public static void ShowMainMenu(GarageHandler<Vehicle> garageHandler)
         {
             int input;
             do
@@ -36,7 +38,7 @@ namespace Garage.UI
                         break;
 
                     case (int)Constants.MainMenuOptions.AddOrRemoveVehicles:
-                        AddDeleteMenu();
+                        AddDeleteMenu(garageHandler);
                         Console.WriteLine("AddOrRemoveVehicles");
                         break;
 
@@ -61,7 +63,7 @@ namespace Garage.UI
         }
 
 
-        public static void AddDeleteMenu()
+        public static void AddDeleteMenu(GarageHandler<Vehicle> garageHandler)
         {
             int input;
             do
@@ -78,6 +80,7 @@ namespace Garage.UI
                 switch (input)
                 {
                     case (int)Constants.AddDeleteMenuOptions.AddVehicle:
+                        garageHandler.AddVehicle();
                         Console.WriteLine("Add vehicle");
                         break;
 

@@ -8,6 +8,16 @@ namespace Garage
             Diesel
         }
 
+        public enum AddMenuOptions
+        {
+            Airplane = 1,
+            Boat = 2,
+            Bus = 3,
+            Car = 4,
+            Motorcycle = 5,
+            Exit = 0
+        }
+
         public enum NumberOfEngines
         {
             One = 1,
