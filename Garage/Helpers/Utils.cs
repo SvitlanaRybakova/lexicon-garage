@@ -38,7 +38,6 @@ namespace Garage.Helpers
             return menuOption;
         }
 
-
         public static string AskForString(string prompt)
         {
             bool success = false;
@@ -116,10 +115,9 @@ namespace Garage.Helpers
                 {
                     return numberOfEngines;
                 }
-                UI.UserMessages.ErrorMessage("Invalid input. Please enter a valid number of engines");
+                UI.UserMessages.ErrorMessage("Invalid input. Please enter a valid number of engines. Options: 1, 2, 3, 4, 6");
             }
         }
-
 
         public static double GetWidthInput()
         {

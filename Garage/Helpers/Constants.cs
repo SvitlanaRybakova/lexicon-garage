@@ -8,7 +8,7 @@ namespace Garage
             Diesel
         }
 
-        public enum AddMenuOptions
+        public enum VehicleType
         {
             Airplane = 1,
             Boat = 2,
