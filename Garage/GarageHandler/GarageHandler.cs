@@ -143,5 +143,14 @@ namespace Garage.GarageHandler
             _garage.AddVehicle((T)(object)vehicle);
         }
 
+        public void DeleteVehicle()
+        {
+            PrintAllVehicles();
+            string registrationNumber = Helpers.Utils.AskForString("Enter the registartion number for delete vehicle ");
+            bool result = _garage.DeleteVehicle(registrationNumber);
+            if (result) UI.UserMessages.SuccessMessage($"The vehicle with reg number {registrationNumber} deleted successfully");
+            else UI.UserMessages.ErrorMessage("Smt went wrong. Cannot delete the vehicle");
+        }
+
     }
 }

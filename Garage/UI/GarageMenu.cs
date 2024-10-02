@@ -80,12 +80,11 @@ namespace Garage.UI
                 {
                     case (int)Constants.AddDeleteMenuOptions.AddVehicle:
                         garageHandler.AddVehicle();
-                    
+
                         break;
 
                     case (int)Constants.AddDeleteMenuOptions.DeleteVehicle:
-
-                        Console.WriteLine("Delete vehicle");
+                        garageHandler.DeleteVehicle();
                         break;
 
                     case (int)Constants.AddDeleteMenuOptions.Exit:

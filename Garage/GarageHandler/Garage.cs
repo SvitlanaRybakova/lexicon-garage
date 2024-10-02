@@ -33,6 +33,25 @@ namespace Garage.Garage
             UserMessages.SuccessMessage($"Vehicle {vehicle.RegistrationNumber} added successfully");
             currentVehicleNumber++;
         }
+
+        internal bool DeleteVehicle(string registrationNumber)
+        {
+            for (int i = 0; i < currentVehicleNumber; i++)
+            {
+                if (vehicles[i].RegistrationNumber == registrationNumber)
+                {
+                    vehicles[i] = null;
+                    for (int j = i; j < currentVehicleNumber - 1; j++) // // Shift all vehicles after the removed one to the left by one position.
+                    {
+                        vehicles[j] = vehicles[j + 1];
+                    }
+                    vehicles[currentVehicleNumber - 1] = null; //set the last vehicle slot to null
+                    currentVehicleNumber--;
+                    return true;
+                }
+            }
+            return false;
+        }
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < currentVehicleNumber; i++)
@@ -47,6 +66,6 @@ namespace Garage.Garage
 
         }
 
-       
+
     }
 }
