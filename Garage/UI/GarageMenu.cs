@@ -33,8 +33,7 @@ namespace Garage.UI
                         break;
 
                     case (int)Constants.MainMenuOptions.PrintVehicleTypesAndCounts:
-
-                        Console.WriteLine("PrintVehicleTypesAndCounts");
+                        garageHandler.PrintVehicleTypesAndCounts();
                         break;
 
                     case (int)Constants.MainMenuOptions.AddOrRemoveVehicles:

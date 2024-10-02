@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 using Garage.Garage;
 using Garage.Helpers;
 using Garage.UI;
@@ -145,7 +147,6 @@ namespace Garage.GarageHandler
 
         public void DeleteVehicle()
         {
-            PrintAllVehicles();
             string registrationNumber = Helpers.Utils.AskForString("Enter the registartion number for delete vehicle ");
             bool result = _garage.DeleteVehicle(registrationNumber);
             if (result) UI.UserMessages.SuccessMessage($"The vehicle with reg number {registrationNumber} deleted successfully");
@@ -154,11 +155,25 @@ namespace Garage.GarageHandler
 
         public void SearchVehicle()
         {
-            PrintAllVehicles();
             string registrationNumber = Helpers.Utils.AskForString("Enter the registartion number for vehicle to search ");
             T findedVehicle = _garage.SearchVehicle(registrationNumber);
             if (findedVehicle != null) UI.UserMessages.SuccessMessage($"Vehicle is founded:\n{findedVehicle} ");
             else UI.UserMessages.ErrorMessage("Smt went wrong. Cannot find the vehicle");
+        }
+
+        public void PrintVehicleTypesAndCounts()
+        {
+            Dictionary<string, int> vehiclesTypesAndCounts = _garage.GetVehicleTypesAndCounts();
+            if (vehiclesTypesAndCounts.Count == 0)
+            {
+                UI.UserMessages.InfoMessage("\nThe Garage is empty\n");
+                return;
+            }
+            foreach (var vehicleType in vehiclesTypesAndCounts)
+            {
+                UserMessages.InfoMessage($"\n{vehicleType.Key} - {vehicleType.Value}\n");
+            }
+
         }
     }
 }

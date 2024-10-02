@@ -66,6 +66,27 @@ namespace Garage.Garage
             return null;
         }
 
+        public Dictionary<string, int> GetVehicleTypesAndCounts()
+        {
+            Dictionary<string, int> vehicleCounts = new Dictionary<string, int>(); // new collection to write the founded values
+
+            for (int i = 0; i < currentVehicleNumber; i++)
+            {
+                string vehicleType = vehicles[i].GetType().Name; // the vehicle type name
+
+                if (vehicleCounts.ContainsKey(vehicleType))
+                {
+                    vehicleCounts[vehicleType]++;
+                }
+                else
+                {
+                    vehicleCounts[vehicleType] = 1; // count for new type
+                }
+            }
+
+            return vehicleCounts;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < currentVehicleNumber; i++)
