@@ -173,7 +173,21 @@ namespace Garage.GarageHandler
             {
                 UserMessages.InfoMessage($"\n{vehicleType.Key} - {vehicleType.Value}\n");
             }
+        }
 
+        public void CreateGarage()
+        {
+            int capacity;
+
+            string capacityInput = Helpers.Utils.AskForString("Enter the capacity of the new garage: ");
+            if (!int.TryParse(capacityInput, out capacity) || capacity <= 0)
+            {
+                UI.UserMessages.ErrorMessage("Invalid input. Please enter a positive number for the garage capacity");
+                return;
+            }
+
+            _garage = new Garage<T>(capacity); // Replace the old garage with a new instance
+            UI.UserMessages.SuccessMessage($"Created the new garage with a capacity of {capacity} vehicles.");
         }
     }
 }
