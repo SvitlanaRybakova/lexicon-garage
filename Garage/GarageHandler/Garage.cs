@@ -38,7 +38,7 @@ namespace Garage.Garage
         {
             for (int i = 0; i < currentVehicleNumber; i++)
             {
-                if (vehicles[i].RegistrationNumber == registrationNumber)
+                if (vehicles[i].RegistrationNumber == registrationNumber.ToUpper())
                 {
                     vehicles[i] = null;
                     for (int j = i; j < currentVehicleNumber - 1; j++) // // Shift all vehicles after the removed one to the left by one position.
@@ -52,6 +52,20 @@ namespace Garage.Garage
             }
             return false;
         }
+
+        internal T? SearchVehicle(string registrationNumber)
+        {
+
+            foreach (var vehicle in vehicles)
+            {
+                if (vehicle != null && vehicle.RegistrationNumber == registrationNumber.ToUpper())
+                {
+                    return (T)vehicle;
+                }
+            }
+            return null;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < currentVehicleNumber; i++)

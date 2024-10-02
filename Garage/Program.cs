@@ -22,9 +22,9 @@ static void SeedGarageWithDummyData(Garage<Vehicle> garageHandler)
     garageHandler.AddVehicle(new Car("XYZ789", "Blue", 4, FuelType.Diesel));
     garageHandler.AddVehicle(new Bus("BUS456", "Yellow", 6, 50));
     garageHandler.AddVehicle(new Boat("BOT001", "White", 23.4));
-    garageHandler.AddVehicle(new Airplane("air498", "Red", 6, NumberOfEnginesType.Three));
-    garageHandler.AddVehicle(new Motorcycle("Mot002", "Black", 6, 50));
-    garageHandler.AddVehicle(new Bus("SUp003", "Rose", 8, 500));
+    garageHandler.AddVehicle(new Airplane("AIR498", "Red", 6, NumberOfEnginesType.Three));
+    garageHandler.AddVehicle(new Motorcycle("MOT002", "Black", 6, 50));
+    garageHandler.AddVehicle(new Bus("SUP003", "Rose", 8, 500));
 
     Console.WriteLine("Garage seeded with dummy data!");
 }

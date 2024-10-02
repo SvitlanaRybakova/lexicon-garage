@@ -152,5 +152,13 @@ namespace Garage.GarageHandler
             else UI.UserMessages.ErrorMessage("Smt went wrong. Cannot delete the vehicle");
         }
 
+        public void SearchVehicle()
+        {
+            PrintAllVehicles();
+            string registrationNumber = Helpers.Utils.AskForString("Enter the registartion number for vehicle to search ");
+            T findedVehicle = _garage.SearchVehicle(registrationNumber);
+            if (findedVehicle != null) UI.UserMessages.SuccessMessage($"Vehicle is founded:\n{findedVehicle} ");
+            else UI.UserMessages.ErrorMessage("Smt went wrong. Cannot find the vehicle");
+        }
     }
 }

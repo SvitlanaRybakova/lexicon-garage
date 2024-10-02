@@ -42,8 +42,7 @@ namespace Garage.UI
                         break;
 
                     case (int)Constants.MainMenuOptions.SearchVehicles:
-
-                        Console.WriteLine("SearchVehicles");
+                        garageHandler.SearchVehicle();
                         break;
                     case (int)Constants.MainMenuOptions.CreateNewGarage:
                         Console.WriteLine("CreateNewGarage");
