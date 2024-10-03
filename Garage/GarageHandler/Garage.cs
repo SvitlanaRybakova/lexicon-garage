@@ -60,10 +60,13 @@ namespace Garage.Garage
             List<T> foundedVehicles = new List<T>();
             foreach (var vehicle in vehicles)
             {
+                bool matches = false;
 
-                if (!string.IsNullOrEmpty(registrationNumber) && vehicle?.RegistrationNumber.ToUpper() == registrationNumber.ToUpper()) foundedVehicles.Add((T)vehicle);
-                if (!string.IsNullOrEmpty(color) && vehicle?.Color.ToUpper() == color.ToUpper()) foundedVehicles.Add((T)vehicle);
-                if (numberOfWheels != null && vehicle?.NumberOfWheels == numberOfWheels) foundedVehicles.Add((T)vehicle);
+                if (!string.IsNullOrEmpty(registrationNumber) && vehicle?.RegistrationNumber.ToUpper() == registrationNumber.ToUpper()) matches = true;
+                if (!string.IsNullOrEmpty(color) && vehicle?.Color.ToUpper() == color.ToUpper()) matches = true;
+                if (numberOfWheels != null && vehicle?.NumberOfWheels == numberOfWheels) matches = true;
+
+                if (matches) foundedVehicles.Add((T)vehicle);
 
             }
 
