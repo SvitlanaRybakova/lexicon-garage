@@ -155,10 +155,30 @@ namespace Garage.GarageHandler
 
         public void SearchVehicle()
         {
-            string registrationNumber = Helpers.Utils.AskForString("Enter the registartion number for vehicle to search ");
-            T findedVehicle = _garage.SearchVehicle(registrationNumber);
-            if (findedVehicle != null) UI.UserMessages.SuccessMessage($"Vehicle is founded:\n{findedVehicle} ");
-            else UI.UserMessages.ErrorMessage("Smt went wrong. Cannot find the vehicle");
+            UI.UserMessages.InfoMessage($"Enter the registration number (or press enter to skip): ");
+            string registrationNumber = Console.ReadLine().ToUpper() ?? string.Empty;
+            UI.UserMessages.InfoMessage($"Enter the vehicle color (or press enter to skip): ");
+            string color = Console.ReadLine().ToUpper() ?? string.Empty;
+            UI.UserMessages.InfoMessage($"Enter the number of wheels (or press enter to skip): ");
+            string wheelsInput = Console.ReadLine().ToUpper() ?? string.Empty;
+            int? numberOfWheels = null;
+
+            if (!string.IsNullOrEmpty(wheelsInput) && int.TryParse(wheelsInput, out int wheels))
+            {
+                numberOfWheels = wheels;
+            }
+
+            List<T> foundVehicles = _garage.SearchVehicle(registrationNumber, color, numberOfWheels);
+        
+            if (foundVehicles != null)
+            {
+                UI.UserMessages.SuccessMessage($"Vehicle is founded:\n ");
+                foreach (var vehicle in foundVehicles)
+                {
+                    UserMessages.InfoMessage($"\n{vehicle}\n");
+                }
+            }
+            else UI.UserMessages.ErrorMessage("Smt went wrong. Cannot find the vehicle(s)");
         }
 
         public void PrintVehicleTypesAndCounts()

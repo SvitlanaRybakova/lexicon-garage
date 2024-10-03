@@ -53,17 +53,21 @@ namespace Garage.Garage
             return false;
         }
 
-        internal T? SearchVehicle(string registrationNumber)
+        internal List<T>? SearchVehicle(string? registrationNumber, string? color, int? numberOfWheels)
         {
 
+            if (currentVehicleNumber == 0) return null;
+            List<T> foundedVehicles = new List<T>();
             foreach (var vehicle in vehicles)
             {
-                if (vehicle != null && vehicle.RegistrationNumber == registrationNumber.ToUpper())
-                {
-                    return (T)vehicle;
-                }
+
+                if (!string.IsNullOrEmpty(registrationNumber) && vehicle?.RegistrationNumber.ToUpper() == registrationNumber.ToUpper()) foundedVehicles.Add((T)vehicle);
+                if (!string.IsNullOrEmpty(color) && vehicle?.Color.ToUpper() == color.ToUpper()) foundedVehicles.Add((T)vehicle);
+                if (numberOfWheels != null && vehicle?.NumberOfWheels == numberOfWheels) foundedVehicles.Add((T)vehicle);
+
             }
-            return null;
+
+            return foundedVehicles;
         }
 
         public Dictionary<string, int> GetVehicleTypesAndCounts()
