@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Garage.UI
 {
-    public class UserMessages
+    public class UserMessages 
     {
         public static void DefaultConsoleColor()
         {
@@ -16,7 +12,7 @@ namespace Garage.UI
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
             DefaultConsoleColor();
-        }
+        } 
 
         public static void SuccessMessage(string message)
         {

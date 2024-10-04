@@ -1,19 +1,14 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Xml.XPath;
 using Garage.Garage;
 using Garage.Helpers;
+using Garage.Interfaces;
 using Garage.UI;
 using Garage.Vehicles;
 using static Garage.Constants;
 
 namespace Garage.GarageHandler
 {
-    public class GarageHandler<T> : IEnumerable<T> where T : Vehicle
+    public class GarageHandler<T> : IEnumerable<T>, IHandler<T> where T : Vehicle
     {
         private Garage<T> _garage;
 
