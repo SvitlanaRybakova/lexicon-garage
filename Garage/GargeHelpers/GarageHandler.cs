@@ -1,24 +1,29 @@
 using System.Collections;
-using Garage.Garage;
 using Garage.Helpers;
 using Garage.Interfaces;
 using Garage.UI;
 using Garage.Vehicles;
-using static Garage.Constants;
 
-namespace Garage.GarageHandler
+namespace Garage.GargeHelpers
 {
-    public class GarageHandler<T> : IEnumerable<T>, IHandler<T> where T : Vehicle
+    public class GarageHandler : IHandler
     {
-        private Garage<T> _garage;
+        private Garage<IVehicle> _garage;
 
-        public GarageHandler(Garage<T> garage)
+        public GarageHandler(Garage<IVehicle> garage)
         {
             _garage = garage; // created instance in Program.cs, passed it to this constructor (like store)
         }
 
         public void AddVehicle()
         {
+            //_garage.CurrentVehicleNumber = -2;
+            //_garage.maxGarageCapacity = 5216;
+
+            if(_garage.IsFull)
+            {
+                //
+            }
             int input;
             do
             {
@@ -32,53 +37,53 @@ namespace Garage.GarageHandler
                                                 + "\n0. Go to Previos Menu"
                                                 + "\n ***************************************\n");
 
-                input = Helpers.Utils.AskForMenuOption();
+                input = Utils.AskForMenuOption();
 
-                if (input == (int)Constants.VehicleType.Exit)
+                if (input == (int)VehicleType.Exit)
                 {
-                    UI.UserMessages.InfoMessage("Exiting to previos menu...\n");
+                    UserMessages.InfoMessage("Exiting to previos menu...\n");
                     return;
                 }
 
-                UI.UserMessages.InfoMessage($"Adding the {(VehicleType)input}...\n");
+                UserMessages.InfoMessage($"Adding the {(VehicleType)input}...\n");
                 string regNumber = Utils.GetRegistrationNumberInput();
-                string color = Helpers.Utils.AskForString("Enter vehicle color ");
+                string color = Utils.AskForString("Enter vehicle color ");
                 int wheels = Utils.GetWheelsInput();
 
                 switch (input)
                 {
-                    case (int)Constants.VehicleType.Airplane:
+                    case (int)VehicleType.Airplane:
                         AddAirplane(regNumber, color, wheels);
                         break;
 
-                    case (int)Constants.VehicleType.Boat:
+                    case (int)VehicleType.Boat:
                         AddBoat(regNumber, color);
                         break;
 
-                    case (int)Constants.VehicleType.Bus:
+                    case (int)VehicleType.Bus:
                         AddBus(regNumber, color, wheels);
                         break;
 
-                    case (int)Constants.VehicleType.Car:
+                    case (int)VehicleType.Car:
                         AddCar(regNumber, color, wheels);
                         break;
-                    case (int)Constants.VehicleType.Motorcycle:
+                    case (int)VehicleType.Motorcycle:
                         AddMotorcycle(regNumber, color, wheels);
                         break;
                     default:
                         UserMessages.ErrorMessage("Invalid option, please try again");
                         break;
                 }
-            } while (input != (int)Constants.VehicleType.Exit);
+            } while (input != (int)VehicleType.Exit);
 
 
         }
 
         public void PrintAllVehicles()
         {
-            if (_garage.currentVehicleNumber == 0)
+            if (_garage.CurrentVehicleNumber == 0)
             {
-                UI.UserMessages.InfoMessage("\nThe Garage is empty\n");
+                UserMessages.InfoMessage("\nThe Garage is empty\n");
                 return;
             }
             foreach (var vehicle in _garage)
@@ -88,15 +93,7 @@ namespace Garage.GarageHandler
         }
 
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _garage.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+      
 
         // TODO: REFACTOR 
         public void AddCar(string regNumber, string color, int wheels)
@@ -105,7 +102,7 @@ namespace Garage.GarageHandler
             FuelType fuelType = Utils.GetFuelTypeInput();
 
             var vehicle = new Car(regNumber, color, wheels, fuelType);
-            _garage.AddVehicle((T)(object)vehicle);
+            _garage.AddVehicle(vehicle);
         }
 
         public void AddBus(string regNumber, string color, int wheels)
@@ -113,7 +110,7 @@ namespace Garage.GarageHandler
             int passengerCapacity = Utils.GetPassengerCapacityInput();
 
             var vehicle = new Bus(regNumber, color, wheels, passengerCapacity);
-            _garage.AddVehicle((T)(object)vehicle);
+            _garage.AddVehicle(vehicle);
         }
 
         public void AddAirplane(string regNumber, string color, int wheels)
@@ -142,19 +139,19 @@ namespace Garage.GarageHandler
 
         public void DeleteVehicle()
         {
-            string registrationNumber = Helpers.Utils.AskForString("Enter the registartion number for delete vehicle ");
+            string registrationNumber = Utils.AskForString("Enter the registartion number for delete vehicle ");
             bool result = _garage.DeleteVehicle(registrationNumber);
-            if (result) UI.UserMessages.SuccessMessage($"The vehicle with reg number {registrationNumber} deleted successfully");
-            else UI.UserMessages.ErrorMessage("Smt went wrong. Cannot delete the vehicle");
+            if (result) UserMessages.SuccessMessage($"The vehicle with reg number {registrationNumber} deleted successfully");
+            else UserMessages.ErrorMessage("Smt went wrong. Cannot delete the vehicle");
         }
 
         public void SearchVehicle()
         {
-            UI.UserMessages.InfoMessage($"Enter the registration number (or press enter to skip): ");
+            UserMessages.InfoMessage($"Enter the registration number (or press enter to skip): ");
             string registrationNumber = Console.ReadLine().ToUpper() ?? string.Empty;
-            UI.UserMessages.InfoMessage($"Enter the vehicle color (or press enter to skip): ");
+            UserMessages.InfoMessage($"Enter the vehicle color (or press enter to skip): ");
             string color = Console.ReadLine().ToUpper() ?? string.Empty;
-            UI.UserMessages.InfoMessage($"Enter the number of wheels (or press enter to skip): ");
+            UserMessages.InfoMessage($"Enter the number of wheels (or press enter to skip): ");
             string wheelsInput = Console.ReadLine().ToUpper() ?? string.Empty;
             int? numberOfWheels = null;
 
@@ -163,30 +160,49 @@ namespace Garage.GarageHandler
                 numberOfWheels = wheels;
             }
 
-            List<T> foundVehicles = _garage.SearchVehicle(registrationNumber, color, numberOfWheels);
-        
-            if (foundVehicles != null)
+
+            IEnumerable<IVehicle> res = _garage;
+
+            if (!string.IsNullOrEmpty(color))
             {
-                UI.UserMessages.SuccessMessage($"Vehicle is founded:\n ");
-                foreach (var vehicle in foundVehicles)
+                res = res.Where(v => v.Color == color);
+            } 
+            
+            if (!string.IsNullOrEmpty(registrationNumber))
+            {
+                res = res.Where(v => v.RegistrationNumber == registrationNumber);
+            } 
+            
+            if (numberOfWheels.HasValue)
+            {
+                res = res.Where(v => v.NumberOfWheels == numberOfWheels);
+            }
+
+
+
+
+
+          //  List<IVehicle> foundVehicles = _garage.SearchVehicle(registrationNumber, color, numberOfWheels);
+          //  List<IVehicle> foundVehicles = _garage.Where(v => string.IsNullOrEmpty(registrationNumber) || v.RegistrationNumber == registrationNumber && string.IsNullOrEmpty(color) , numberOfWheels);
+
+            if (res.Any())
+            {
+                UserMessages.SuccessMessage($"Vehicle is founded:\n ");
+                foreach (var vehicle in res)
                 {
                     UserMessages.InfoMessage($"\n{vehicle}\n");
                 }
             }
-            else UI.UserMessages.ErrorMessage("Smt went wrong. Cannot find the vehicle(s)");
+            else UserMessages.ErrorMessage("Smt went wrong. Cannot find the vehicle(s)");
         }
 
         public void PrintVehicleTypesAndCounts()
         {
-            Dictionary<string, int> vehiclesTypesAndCounts = _garage.GetVehicleTypesAndCounts();
-            if (vehiclesTypesAndCounts.Count == 0)
+            var res = _garage.GroupBy(v => v.GetType().Name).Select(v => new { Key = v.Key, Count = v.Count() });
+          
+            foreach (var vehicleType in res)
             {
-                UI.UserMessages.InfoMessage("\nThe Garage is empty\n");
-                return;
-            }
-            foreach (var vehicleType in vehiclesTypesAndCounts)
-            {
-                UserMessages.InfoMessage($"\n{vehicleType.Key} - {vehicleType.Value}\n");
+                UserMessages.InfoMessage($"\n{vehicleType.Key} - {vehicleType.Count}\n");
             }
         }
 
@@ -194,15 +210,15 @@ namespace Garage.GarageHandler
         {
             int capacity;
 
-            string capacityInput = Helpers.Utils.AskForString("Enter the capacity of the new garage: ");
+            string capacityInput = Utils.AskForString("Enter the capacity of the new garage: ");
             if (!int.TryParse(capacityInput, out capacity) || capacity <= 0)
             {
-                UI.UserMessages.ErrorMessage("Invalid input. Please enter a positive number for the garage capacity");
+                UserMessages.ErrorMessage("Invalid input. Please enter a positive number for the garage capacity");
                 return;
             }
 
             _garage = new Garage<T>(capacity); // Replace the old garage with a new instance
-            UI.UserMessages.SuccessMessage($"Created the new garage with a capacity of {capacity} vehicles.");
+            UserMessages.SuccessMessage($"Created the new garage with a capacity of {capacity} vehicles.");
         }
     }
 }

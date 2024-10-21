@@ -6,7 +6,7 @@ using Garage.Vehicles;
 
 namespace Garage.Interfaces
 {
-    public interface IHandler<T> where T : Vehicle
+    public interface IHandler
     {
         void AddVehicle();
         void PrintAllVehicles();

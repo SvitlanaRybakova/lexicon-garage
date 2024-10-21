@@ -7,7 +7,7 @@ namespace Garage.Vehicles
 {
     public class Motorcycle : Vehicle
     {
-        public int CylinderVolume { get; set; }
+        public int CylinderVolume { get;  }
         public Motorcycle(string registrationNumber, string color, int numberOfWheels, int cylinderVolume) : base(registrationNumber, color, numberOfWheels)
         {
             CylinderVolume = cylinderVolume;
@@ -15,7 +15,7 @@ namespace Garage.Vehicles
 
         public override string ToString()
         {
-            return $"Type: {GetType().Name}\nRegistration number: {RegistrationNumber}\nColor: {Color}\nWheels: {NumberOfWheels} \nCylinder Volume: {CylinderVolume}";
+            return $"{base.ToString()} \nCylinder Volume: {CylinderVolume}";
         }
     }
 }

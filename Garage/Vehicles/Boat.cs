@@ -7,7 +7,7 @@ namespace Garage.Vehicles
 {
     public class Boat : Vehicle
     {
-        public double Widht { get; set; }
+        public double Widht { get; }
 
         public Boat(string registrationNumber, string color, double widht)
             : base(registrationNumber, color, null)  // No wheels for the boat

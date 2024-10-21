@@ -5,20 +5,22 @@ namespace Garage.Vehicles
 
     public class Vehicle : IVehicle
     {
-        public string RegistrationNumber { get; set; }
-        public string Color { get; set; }
-        public int? NumberOfWheels { get; set; }
+        public string RegistrationNumber { get; }
+        public string Color { get; }
+        public int? NumberOfWheels { get;  }
 
+        public string VehicleTypeName { get;  }
         public Vehicle(string registrationNumber, string color, int? numberOfWheels = null)
         {
             RegistrationNumber = registrationNumber;
             Color = color;
             NumberOfWheels = numberOfWheels;
+            VehicleTypeName = GetType().Name;
         }
 
         public override string ToString()
         {
-            return $"Type: {GetType().Name}\nRegistration number: {RegistrationNumber}\nColor: {Color}\nWheels: {NumberOfWheels}";
+            return $"Type: {VehicleTypeName}\nRegistration number: {RegistrationNumber}\nColor: {Color}\nWheels: {NumberOfWheels}";
         }
     }
 }

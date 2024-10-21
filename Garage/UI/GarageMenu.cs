@@ -2,15 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Garage.GarageHandler;
+using Garage.GargeHelpers;
+using Garage.Helpers;
+using Garage.Interfaces;
 using Garage.Vehicles;
 
 namespace Garage.UI
 {
     public class GarageMenu
     {
-        public static void ShowMainMenu(GarageHandler<Vehicle> garageHandler)
+        //private readonly IHandler handler;
+
+        //public GarageMenu(IHandler handeler)
+        //{
+        //    this.handler = handeler;
+        //}
+
+        public static void ShowMainMenu(IHandler garageHandler)
         {
+
+            
             int input;
             do
             {
@@ -28,11 +39,11 @@ namespace Garage.UI
 
                 switch (input)
                 {
-                    case (int)Constants.MainMenuOptions.PrintAllVehicles:
+                    case (int)MainMenuOptions.PrintAllVehicles:
                         garageHandler.PrintAllVehicles();
                         break;
 
-                    case (int)Constants.MainMenuOptions.PrintVehicleTypesAndCounts:
+                    case (int)MainMenuOptions.PrintVehicleTypesAndCounts:
                         garageHandler.PrintVehicleTypesAndCounts();
                         break;
 
@@ -60,7 +71,7 @@ namespace Garage.UI
         }
 
 
-        public static void AddDeleteMenu(GarageHandler<Vehicle> garageHandler)
+        public static void AddDeleteMenu(IHandler garageHandler)
         {
             int input;
             do
@@ -77,6 +88,8 @@ namespace Garage.UI
                 switch (input)
                 {
                     case (int)Constants.AddDeleteMenuOptions.AddVehicle:
+
+
                         garageHandler.AddVehicle();
 
                         break;
@@ -93,7 +106,7 @@ namespace Garage.UI
                         break;
                 }
 
-            } while (input != (int)Constants.AddDeleteMenuOptions.Exit);
+            } while (input != (int)AddDeleteMenuOptions.Exit);
 
         }
 
